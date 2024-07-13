@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerStatics : MonoBehaviour
@@ -14,6 +16,9 @@ public class PlayerStatics : MonoBehaviour
     public float cooldown;
     public float Experience;
     public float totalScore;
+    [SerializeField] TextMeshProUGUI totalScoreUI;
+
+    [SerializeField] bool InstantiateEnemies;
     public bool area1Stay;
     public bool area2Stay;
     public bool area3Stay;
@@ -52,23 +57,32 @@ public class PlayerStatics : MonoBehaviour
         StartCoroutine(UpdateEnemyControllers());
     }
 
+    private void Update()
+    {
+        totalScoreUI.text = totalScore.ToString(); 
+    }
+
     private IEnumerator UpdateEnemyControllers()
     {
-        healthcooldown -= 1;
+        if (InstantiateEnemies)
+        {
+            healthcooldown -= 1;
 
-        if (healthcooldown <= 0)
-        { 
-            healthcooldown = healthcooldownMax;
+            if (healthcooldown <= 0)
+            {
+                healthcooldown = healthcooldownMax;
+            }
+
+            enemyCooldown = enemyCooldown * 0.99f;
+            enemySpeed = enemySpeed + 0.5f;
+
+            Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Length)], instancers[UnityEngine.Random.Range(0, instancers.Length)].transform.position, Quaternion.identity);
+
+
+            yield return new WaitForSeconds(enemyCooldown);
+            StartCoroutine(UpdateEnemyControllers());
         }
-
-        enemyCooldown = enemyCooldown * 0.99f;
-        enemySpeed = enemySpeed + 0.5f;
-        
-        Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Length)], instancers[UnityEngine.Random.Range(0,instancers.Length)].transform.position, Quaternion.identity);
-        
-        
-        yield return new WaitForSeconds(enemyCooldown);
-        StartCoroutine(UpdateEnemyControllers());
+       
     }
 
     private void UpdateAll()
@@ -85,32 +99,32 @@ public class PlayerStatics : MonoBehaviour
     public void AddDamage(int amount)
     {
         damageDealt += amount;
-        UI.instance.UpdateDamage(damageDealt);
+        
     }
 
     public void AddProjectileSpeed(float amount)
     {
         projectileSpeed += amount;
-        UI.instance.UpdateProjectileSpeed(projectileSpeed);
+        
     }
 
     public void Cooldown (float amount)
     {
         cooldown -= amount;
-        UI.instance.UpdateCooldown(cooldown);
+        
     }
 
 
     public void AddExperience(int amount)
     {
         Experience += amount;
-        UI.instance.UpdateExperience(Experience);
+        
     }
 
 
     public void AddScore(float amount)
     {
         totalScore += amount;
-        UI.instance.UpdateScore(totalScore);
+        
     }
 }

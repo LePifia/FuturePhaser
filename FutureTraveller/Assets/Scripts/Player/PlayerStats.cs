@@ -20,12 +20,15 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float scoreGiven = 0;
 
     [SerializeField]bool player;
+    [SerializeField] bool enemy;
     [SerializeField] bool damageblae = true;
 
     [SerializeField] bool area1Enemy;
     [SerializeField] bool area2Enemy;
     [SerializeField] bool area3Enemy;
     [SerializeField] bool area4Enemy;
+
+    
 
     float timer;
 
@@ -78,32 +81,38 @@ public class PlayerStats : MonoBehaviour
             }
             else
             {
-                DamageDealer damageDealer = other.GetComponent<DamageDealer>();
-
-                if (damageDealer != null)
+            DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+            if (damageDealer != null)
+            {
+                if (other.GetComponent<PlayerStats>().enemy == false && other.GetComponent<PlayerStats>() != null)
                 {
-                    
+                
+
+                
+
                     TakeDamage(damageDealer.GetDamage());
 
-                if (area1Enemy == true && damageDealer.GetDamageType() == damageType.area1)
-                {
-                    TakeDamage(damageDealer.GetDamage() * 9);
-                }
+                    if (area1Enemy == true && damageDealer.GetDamageType() == damageType.area1)
+                    {
+                        TakeDamage(damageDealer.GetDamage() * 9);
+                    }
 
-                if (area2Enemy == true && damageDealer.GetDamageType() == damageType.area2)
-                {
-                    TakeDamage(damageDealer.GetDamage() * 9);
-                }
+                    if (area2Enemy == true && damageDealer.GetDamageType() == damageType.area2)
+                    {
+                        TakeDamage(damageDealer.GetDamage() * 9);
+                    }
 
-                if (area3Enemy == true && damageDealer.GetDamageType() == damageType.area3)
-                {
-                    TakeDamage(damageDealer.GetDamage() * 9);
-                }
+                    if (area3Enemy == true && damageDealer.GetDamageType() == damageType.area3)
+                    {
+                        TakeDamage(damageDealer.GetDamage() * 9);
+                    }
 
-                if (area4Enemy == true && damageDealer.GetDamageType() == damageType.area4)
-                {
-                    TakeDamage(damageDealer.GetDamage() * 9);
+                    if (area4Enemy == true && damageDealer.GetDamageType() == damageType.area4)
+                    {
+                        TakeDamage(damageDealer.GetDamage() * 9);
+                    }
                 }
+               
 
 
             }
@@ -179,7 +188,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (statType == statType.area1enemy || statType == statType.area2enemy || statType == statType.area3enemy || statType == statType.area4enemy)
         {
-            AudioManager.Instance.CasualExplosion();
+            //AudioManager.Instance.CasualExplosion();
             PlayerStatics.Instance.AddScore(scoreGiven);
             PlayerStatics.Instance.AddExperience(1);
             
@@ -187,7 +196,7 @@ public class PlayerStats : MonoBehaviour
 
         if (statType == statType.projectile)
         {
-            AudioManager.Instance.PlayerExplosion();
+            //AudioManager.Instance.PlayerExplosion();
             
         }
             

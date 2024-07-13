@@ -6,9 +6,27 @@ public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed;
 
+    [SerializeField]Transform limitWest;
+    [SerializeField] Transform limitEast;
+    [SerializeField] Transform limitNorth;
+    [SerializeField] Transform limitSouth;
+
+
+    Vector3 moveDir;
+
     void Update ()
     {
-        Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * moveSpeed * Time.deltaTime;
-        transform.position += moveDir;
+
+
+
+
+
+
+        moveDir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * moveSpeed * Time.deltaTime;
+            transform.position += moveDir;
+        
+
+
+
     }
 }

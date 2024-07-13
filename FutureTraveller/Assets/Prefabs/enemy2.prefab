@@ -151,6 +151,7 @@ MonoBehaviour:
   statType: 1
   health: 5
   spriteRenderer: {fileID: 5622408459534943965}
+  dropable: {fileID: 7265688791388071842, guid: b55fe9aa5406bc04caaafcf3e89922da, type: 3}
   scoreGiven: 1
   timerMax: 1
   player: 0

@@ -2780,6 +2780,7 @@ MonoBehaviour:
   statType: 4
   health: 10
   spriteRenderer: {fileID: 897289150}
+  dropable: {fileID: 7265688791388071842, guid: b55fe9aa5406bc04caaafcf3e89922da, type: 3}
   scoreGiven: 0
   timerMax: 5
   player: 1
@@ -2810,6 +2811,8 @@ MonoBehaviour:
   Experience: 0
   coins: 0
   totalScore: 0
+  targetScore: 0
+  blackHole: {fileID: 0}
   totalScoreUI: {fileID: 748716549}
   InstantiateEnemies: 1
   area1Stay: 0

@@ -8,6 +8,7 @@ public enum areaType
     area2,
     area3,
     area4,
+    agujeroNegro,
 }
 public class ColliderArea : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class ColliderArea : MonoBehaviour
 
             if (collision.CompareTag("Enemy"))
             {
-                Debug.Log("Enemy is in " + areaType);
+                
 
                 if (areaType == areaType.area1)
                 {
@@ -107,6 +108,18 @@ public class ColliderArea : MonoBehaviour
                     if (enemyCollide == statType.area4enemy)
                     {
                         collision.GetComponent<PlayerStats>().TakeDamage(1);
+                    }
+
+                }
+
+                if (areaType == areaType.agujeroNegro)
+                {
+                    statType enemyCollide = collision.GetComponent<PlayerStats>().GetStatType();
+
+                    if(enemyCollide == statType.area1enemy || enemyCollide == statType.area2enemy || enemyCollide == statType.area3enemy || areaType == areaType.area4)
+                    {
+                        collision.GetComponent<PlayerStats>().TakeDamage(1);
+                        Debug.Log("Enemy is in " + areaType);
                     }
 
                 }

@@ -19,6 +19,17 @@ public class PickUp : MonoBehaviour
             if (type == PickUpType.coin)
             {
                 collision.GetComponent<PlayerStatics>().AddCoins(value);
+
+                if (PlayerStatics.Instance.activateBlackHole == true)
+                {
+                    int random = Random.Range(0, 100);
+
+                    if (random > 65)
+                    {
+                        Instantiate(PlayerStatics.Instance.blackHole, gameObject.transform.position, Quaternion.identity);
+                    }
+                    
+                }
                 Destroy(gameObject);
             }
         }    

@@ -154,12 +154,16 @@ public class PlayerStats : MonoBehaviour
             
             Destroy(gameObject);
 
-            int probability = 50;
+            int probability = 90;
             int targetProbability = UnityEngine.Random.Range(0, 100);
 
             if (targetProbability > probability)
             {
-                Instantiate(dropable, gameObject.transform.position, Quaternion.identity);
+                if (PlayerStatics.Instance.totalScore > 25)
+                {
+                    Instantiate(dropable, gameObject.transform.position, Quaternion.identity);
+                }
+                
             }
         }
         if (statType == statType.player)

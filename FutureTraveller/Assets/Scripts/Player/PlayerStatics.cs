@@ -12,14 +12,17 @@ public class PlayerStatics : MonoBehaviour
     public static PlayerStatics Instance { get; private set; }
 
     public int damageDealt = 1;
-    public float projectileSpeed = 5;
-    public float cooldown;
+
     public float Experience;
     public float coins;
     public float totalScore;
+    [SerializeField] float maxEnemySpeed;
     [SerializeField] float targetScore;
-    [SerializeField] GameObject blackHole;
+    public GameObject blackHole;
     [SerializeField] TextMeshProUGUI totalScoreUI;
+    [SerializeField] TextMeshProUGUI appleUI;
+    public bool activateBlackHole;
+   
 
     [SerializeField] bool InstantiateEnemies;
     public bool area1Stay;
@@ -31,7 +34,7 @@ public class PlayerStatics : MonoBehaviour
 
     public int health = 1;
     public int enemyHealth = 5;
-    float enemyCooldown = 5;
+    float enemyCooldown = 3;
     public float enemySpeed = 1;
     [SerializeField] GameObject [] enemies;
     [SerializeField] GameObject []instancers;
@@ -55,7 +58,7 @@ public class PlayerStatics : MonoBehaviour
 
     private void Start()
     {
-        UpdateAll();
+        
 
         StartCoroutine(UpdateEnemyControllers());
     }
@@ -63,10 +66,14 @@ public class PlayerStatics : MonoBehaviour
     private void Update()
     {
         totalScoreUI.text = totalScore.ToString(); 
+        appleUI.text = coins.ToString();
 
-        if (coins == targetScore && blackHole != null)
+        if (coins >= targetScore && blackHole != null)
         {
-            Instantiate(blackHole, gameObject.transform.position, Quaternion.identity);
+            
+            activateBlackHole = true;
+
+            //Instantiate(blackHole, gameObject.transform.position, Quaternion.identity);
         }
     }
 
@@ -82,7 +89,17 @@ public class PlayerStatics : MonoBehaviour
             }
 
             enemyCooldown = enemyCooldown * 0.99f;
-            enemySpeed = enemySpeed + 0.5f;
+            Debug.Log(enemySpeed);
+
+            if (enemySpeed >= maxEnemySpeed)
+            {
+
+            }
+            else
+            {
+                enemySpeed = enemySpeed + 0.05f;
+            }
+            
 
             Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Length)], instancers[UnityEngine.Random.Range(0, instancers.Length)].transform.position, Quaternion.identity);
 
@@ -93,32 +110,9 @@ public class PlayerStatics : MonoBehaviour
        
     }
 
-    private void UpdateAll()
-    {
-        /*
-        UI.instance.UpdateDamage(damageDealt);
-        UI.instance.UpdateProjectileSpeed(projectileSpeed);
-        UI.instance.UpdateCooldown(cooldown);
-        UI.instance.UpdateMultiplier(projectileSpeed);
-        */
-    }
-
-
     public void AddDamage(int amount)
     {
         damageDealt += amount;
-        
-    }
-
-    public void AddProjectileSpeed(float amount)
-    {
-        projectileSpeed += amount;
-        
-    }
-
-    public void Cooldown (float amount)
-    {
-        cooldown -= amount;
         
     }
 

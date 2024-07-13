@@ -17,6 +17,8 @@ public class PlayerStatics : MonoBehaviour
     public float Experience;
     public float coins;
     public float totalScore;
+    [SerializeField] float targetScore;
+    [SerializeField] GameObject blackHole;
     [SerializeField] TextMeshProUGUI totalScoreUI;
 
     [SerializeField] bool InstantiateEnemies;
@@ -61,6 +63,11 @@ public class PlayerStatics : MonoBehaviour
     private void Update()
     {
         totalScoreUI.text = totalScore.ToString(); 
+
+        if (coins == targetScore && blackHole != null)
+        {
+            Instantiate(blackHole, gameObject.transform.position, Quaternion.identity);
+        }
     }
 
     private IEnumerator UpdateEnemyControllers()

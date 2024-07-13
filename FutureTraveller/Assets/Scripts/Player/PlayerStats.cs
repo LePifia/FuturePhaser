@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] statType statType;
     [SerializeField] int health = 5;
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] GameObject dropable;
     [SerializeField] float scoreGiven = 0;
     [SerializeField] float timerMax = 5;
 
@@ -152,6 +153,14 @@ public class PlayerStats : MonoBehaviour
         {
             
             Destroy(gameObject);
+
+            int probability = 50;
+            int targetProbability = UnityEngine.Random.Range(0, 100);
+
+            if (targetProbability > probability)
+            {
+                Instantiate(dropable, gameObject.transform.position, Quaternion.identity);
+            }
         }
         if (statType == statType.player)
         {

@@ -9,6 +9,7 @@ public class enemyBehaviour : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        moveSpeed = PlayerStatics.Instance.enemySpeed;
         
     }
 

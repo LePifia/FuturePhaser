@@ -24,7 +24,7 @@ public class PlayerStatics : MonoBehaviour
     public int health = 1;
     public int enemyHealth = 5;
     float enemyCooldown = 5;
-    public float enemySpeed;
+    public float enemySpeed = 1;
     [SerializeField] GameObject [] enemies;
     [SerializeField] GameObject []instancers;
 
@@ -57,13 +57,12 @@ public class PlayerStatics : MonoBehaviour
         healthcooldown -= 1;
 
         if (healthcooldown <= 0)
-        {
-            health++;
+        { 
             healthcooldown = healthcooldownMax;
         }
 
         enemyCooldown = enemyCooldown * 0.99f;
-        enemySpeed = enemySpeed * 0.99f;
+        enemySpeed = enemySpeed + 0.5f;
         
         Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Length)], instancers[UnityEngine.Random.Range(0,instancers.Length)].transform.position, Quaternion.identity);
         

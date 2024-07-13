@@ -59,6 +59,59 @@ public class ColliderArea : MonoBehaviour
                     PlayerStatics.Instance.area4Stay = false;
                 }
             }
+
+            if (collision.CompareTag("Enemy"))
+            {
+                Debug.Log("Enemy is in " + areaType);
+
+                if (areaType == areaType.area1)
+                {
+                    statType enemyCollide = collision.GetComponent<PlayerStats>().GetStatType();
+
+                    if (enemyCollide == statType.area1enemy)
+                    {
+
+                        collision.GetComponent<PlayerStats>().TakeDamage(1);
+
+                    }
+
+                }
+
+                if (areaType == areaType.area2)
+                {
+                    statType enemyCollide = collision.GetComponent<PlayerStats>().GetStatType();
+
+                    if (enemyCollide == statType.area2enemy)
+                    {
+                        collision.GetComponent<PlayerStats>().TakeDamage(1);
+                    }
+
+                }
+
+                if (areaType == areaType.area3)
+                {
+                    statType enemyCollide = collision.GetComponent<PlayerStats>().GetStatType();
+
+                    if (enemyCollide == statType.area3enemy)
+                    {
+                        collision.GetComponent<PlayerStats>().TakeDamage(1);
+                    }
+
+
+                }
+
+                if (areaType == areaType.area4)
+                {
+                    statType enemyCollide = collision.GetComponent<PlayerStats>().GetStatType();
+
+                    if (enemyCollide == statType.area4enemy)
+                    {
+                        collision.GetComponent<PlayerStats>().TakeDamage(1);
+                    }
+
+                }
+
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ public class DisableBehaviour : MonoBehaviour
 {
     [SerializeField] float timer;
     [SerializeField] float timeLook = 5f;
-    [SerializeField] float shakeDuration = 0.5f;  // Duration of the shake effect
     [SerializeField] float shakeMagnitude = 0.05f; // Magnitude of the shake effect
 
     private bool isPlayerOnPoint = false;

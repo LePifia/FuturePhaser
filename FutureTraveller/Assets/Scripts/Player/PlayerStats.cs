@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] int health = 5;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] float scoreGiven = 0;
+    [SerializeField] float timerMax = 5;
 
     [SerializeField]bool player;
     [SerializeField] bool enemy;
@@ -77,7 +78,7 @@ public class PlayerStats : MonoBehaviour
                     TakeDamage(damageDealer.GetDamage());
                 }
 
-                timer = 5;
+                timer = timerMax;
             }
             else
             {
@@ -86,31 +87,7 @@ public class PlayerStats : MonoBehaviour
             {
                 if (other.GetComponent<PlayerStats>().enemy == false && other.GetComponent<PlayerStats>() != null)
                 {
-                
-
-                
-
-                    TakeDamage(damageDealer.GetDamage());
-
-                    if (area1Enemy == true && damageDealer.GetDamageType() == damageType.area1)
-                    {
-                        TakeDamage(damageDealer.GetDamage() * 9);
-                    }
-
-                    if (area2Enemy == true && damageDealer.GetDamageType() == damageType.area2)
-                    {
-                        TakeDamage(damageDealer.GetDamage() * 9);
-                    }
-
-                    if (area3Enemy == true && damageDealer.GetDamageType() == damageType.area3)
-                    {
-                        TakeDamage(damageDealer.GetDamage() * 9);
-                    }
-
-                    if (area4Enemy == true && damageDealer.GetDamageType() == damageType.area4)
-                    {
-                        TakeDamage(damageDealer.GetDamage() * 9);
-                    }
+                    TakeDamage(damageDealer.GetDamage());               
                 }
                
 
@@ -129,18 +106,38 @@ public class PlayerStats : MonoBehaviour
     {
         OnHitEvent.Invoke();
 
-        if (damageblae)
+        if (enemy == true)
         {
-            damageblae = false;
-            health -= Damage;
-            Debug.Log("Damaged");
+            if (timer <= 0)
+            {
+                if (damageblae)
+                {
+                    damageblae = false;
+                    health -= Damage;
+                    Debug.Log("Damaged");
+                    StartCoroutine(DamageFlash());
+                }
+                timer = timerMax;
+            }
+        }
+        else
+        {
+            if (damageblae)
+            {
+                damageblae = false;
+                health -= Damage;
+                Debug.Log("Damaged");
+                StartCoroutine(DamageFlash());
+            }
         }
         
-
+        
+/*
         if (health > 0)
         {
             StartCoroutine(DamageFlash());
         }
+*/
         
 
         if (health <= 0)
@@ -173,6 +170,11 @@ public class PlayerStats : MonoBehaviour
     public int GetHealth()
     {
         return health;
+    }
+
+    public statType GetStatType()
+    {
+        return statType;
     }
 
     IEnumerator DamageFlash()

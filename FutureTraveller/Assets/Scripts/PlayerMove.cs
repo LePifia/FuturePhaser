@@ -6,10 +6,6 @@ public class PlayerMove : MonoBehaviour
 {
     public float moveSpeed;
 
-    [SerializeField]Transform limitWest;
-    [SerializeField] Transform limitEast;
-    [SerializeField] Transform limitNorth;
-    [SerializeField] Transform limitSouth;
 
 
     Vector3 moveDir;
@@ -29,4 +25,7 @@ public class PlayerMove : MonoBehaviour
 
 
     }
+
+    
+
 }

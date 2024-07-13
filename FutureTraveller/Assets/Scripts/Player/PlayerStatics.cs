@@ -15,6 +15,7 @@ public class PlayerStatics : MonoBehaviour
     public float projectileSpeed = 5;
     public float cooldown;
     public float Experience;
+    public float coins;
     public float totalScore;
     [SerializeField] TextMeshProUGUI totalScoreUI;
 
@@ -126,5 +127,11 @@ public class PlayerStatics : MonoBehaviour
     {
         totalScore += amount;
         
+    }
+
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+
     }
 }
